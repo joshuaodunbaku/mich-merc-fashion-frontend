@@ -23,18 +23,20 @@ const NavBar = () => {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="mx-auto gap-0 gap-md-3">
-							<Nav.Link
-								className="navbar-nav nav-item p-2"
+							{/* <Nav.Link> */}
+							<Link
+								className="navbar-nav nav-item p-2 text-decoration-none nav-link"
 								style={{ fontSize: "1.2em", fontVariant: "all-small-caps" }}
 								eventKey={"1"}
-								onClick={() => navigate("/")}
+								to={"/"}
 							>
 								HOME
-							</Nav.Link>
+							</Link>
+							{/* </Nav.Link> */}
 							{/* <Nav.Link> */}
 							<Dropdown>
 								<Dropdown.Toggle
-									className="text-dark"
+									className="text-decoration-none nav-link"
 									variant="transparent"
 									id="dropdown-basic"
 									style={{
@@ -47,30 +49,46 @@ const NavBar = () => {
 								</Dropdown.Toggle>
 								<Dropdown.Menu>
 									{/* <Link className="text-decoration-none" to={"/product"}> */}
-										<Dropdown.Item onClick={()=> navigate("/product")}>Glasses</Dropdown.Item>
+									<Dropdown.Item onClick={() => navigate("/shop/glasses")}>
+										Glasses
+									</Dropdown.Item>
 									{/* </Link> */}
-									<Dropdown.Item>Shoes</Dropdown.Item>
-									<Dropdown.Item>Footwares</Dropdown.Item>
-									<Dropdown.Item>Shirts</Dropdown.Item>
+									<Dropdown.Item onClick={() => navigate("/shop/belts")}>
+										Belts
+									</Dropdown.Item>
+									<Dropdown.Item onClick={() => navigate("/shop/shoes")}>
+										Footwares
+									</Dropdown.Item>
+									<Dropdown.Item onClick={() => navigate("/shop/shirts")}>
+										Shirts
+									</Dropdown.Item>
 								</Dropdown.Menu>
 							</Dropdown>
 							{/* </Nav.Link> */}
-							<Nav.Link
-								className="navbar-nav nav-item p-2"
+							<Link
+								className="navbar-nav nav-item p-2 text-decoration-none nav-link"
 								style={{ fontSize: "1.2em", fontVariant: "all-small-caps" }}
 								eventKey={"3"}
-								onClick={() => navigate("/shop")}
+								to={"/shop"}
 							>
 								SHOP
-							</Nav.Link>
-							<Nav.Link
-								className="navbar-nav nav-item p-2"
+							</Link>
+							<Link
+								className="navbar-nav nav-item p-2 text-decoration-none nav-link"
 								style={{ fontSize: "1.2em", fontVariant: "all-small-caps" }}
 								eventKey={"4"}
-								onClick={() => navigate("/contact-us")}
+								to={"/contact-us"}
 							>
 								CONTACT US
-							</Nav.Link>
+							</Link>
+							<Link
+								className="navbar-nav nav-item p-2 text-decoration-none nav-link"
+								style={{ fontSize: "1.2em", fontVariant: "all-small-caps" }}
+								eventKey={"5"}
+								to={"/dashboard"}
+							>
+								DASHBOARD
+							</Link>
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

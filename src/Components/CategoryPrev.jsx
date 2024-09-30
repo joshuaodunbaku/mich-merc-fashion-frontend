@@ -3,6 +3,7 @@ import ProductCard from "./ProductCard";
 import { Link } from "react-router-dom";
 import { capitalizeFirstLetter } from "../Utils/helpers";
 import {  BiLinkAlt } from "react-icons/bi";
+import CardCarousell from "./CardCarousel";
 
 const CategoryPrev = ({ catInfo, catTitle }) => {
 	return (
@@ -18,12 +19,7 @@ const CategoryPrev = ({ catInfo, catTitle }) => {
 			</Link>
 
 			<div className="row">
-				{/* {Array.from({ length: 4 }).map((_, index) => ( */}
-				{catInfo.slice(0, 4).map((info, index) => (
-					<div className="col-12 col-md-6 col-lg-3">
-						<ProductCard productInfo={info} myIndex={index} />
-					</div>
-				))}
+				{<CardCarousell cards={catInfo} />}
 				<div className="text-center">
 					<Link
 						className="btn btn-outline-danger  rounded-pill poppins"

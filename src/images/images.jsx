@@ -76,7 +76,26 @@ const IMAGES = {
 	).href,
 
 	belt1: new URL("../assets/leather-belt.png", import.meta.url).href,
-	shirt1: new URL("../assets/blank-black-t-shirt-hanger-isolated-white-space.png", import.meta.url).href,
+	shirt1: new URL(
+		"../assets/blank-black-t-shirt-hanger-isolated-white-space.png",
+		import.meta.url
+	).href,
+
+	// Dashboard
+	viewItemsSvg: new URL("../assets/Svg/undraw_survey_05s5.svg", import.meta.url)
+		.href,
+	createItemsSvg: new URL(
+		"../assets/Svg/undraw_posts_re_ormv.svg",
+		import.meta.url
+	).href,
+	orders: new URL(
+		"../assets/Svg/undraw_order_delivered_re_v4ab.svg",
+		import.meta.url
+	).href,
+	changePw: new URL(
+		"../assets/Svg/undraw_forgot_password_re_hxwm.svg",
+		import.meta.url
+	).href,
 };
 
 export default IMAGES;
