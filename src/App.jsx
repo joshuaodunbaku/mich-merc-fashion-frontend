@@ -8,6 +8,7 @@ import ViewItems from "./Routes/ViewItems";
 import CreateItems from "./Routes/CreateItems";
 import Orders from "./Routes/Orders";
 import ChangePw from "./Routes/ChangePw";
+import ViewItemsDetails from "./Routes/ViewItemsDetails";
 // import KiddiesHome from "../../kiddies-and-me/src/Routes/Home"
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
 				<Route path="/shop/:category" element={<Category />} />
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/dashboard/view-items" element={<ViewItems />} />
+				<Route
+					path="/dashboard/view-items/details"
+					element={<ViewItemsDetails />}
+				/>
 				<Route path="/dashboard/create-items" element={<CreateItems />} />
 				<Route path="/dashboard/orders" element={<Orders />} />
 				<Route path="/dashboard/change-pw" element={<ChangePw />} />

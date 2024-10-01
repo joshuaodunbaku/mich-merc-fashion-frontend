@@ -1,6 +1,8 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { SHOP_DATA } from "../../data";
+import { capitalizeFirstLetter } from "../Utils/helpers";
 
 const ViewItems = () => {
 	return (
@@ -13,13 +15,32 @@ const ViewItems = () => {
 						<tr>
 							<th>#</th>
 							<th>Product</th>
-							<th>Email</th>
-							<th>Phone Number</th>
-							<th>Details</th>
+							<th>Categories</th>
+							<th>Available</th>
+							<th>Date</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						{Object.entries(SHOP_DATA).map(([cat, items], index) => {
+							return items.map(({ name }, index) => {
+								return (
+									<tr>
+										<td>{index}</td>
+										<td>{name}</td>
+										<td>{capitalizeFirstLetter(cat)}</td>
+										<td>
+											<span className="text-danger fw-bold">none</span>
+										</td>
+										<td>01/10/2024</td>
+										<th>
+											<Link to={"details"}>View</Link>
+										</th>
+									</tr>
+								);
+							});
+						})}
+						{/* <tr>
 							<td>1</td>
 							<td>John Doe</td>
 							<td>johndoe@gmail.com</td>
@@ -45,7 +66,7 @@ const ViewItems = () => {
 							<th>
 								<Link to={"details"}>View</Link>
 							</th>
-						</tr>
+						</tr> */}
 					</tbody>
 				</Table>
 			</div>

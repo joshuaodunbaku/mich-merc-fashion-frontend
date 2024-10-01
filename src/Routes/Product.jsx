@@ -36,7 +36,9 @@ const Product = () => {
 								Categories
 							</p>
 							<ul className="list-group">
-								<li className="list-group-item list-group-item-action">An item</li>
+								<li className="list-group-item list-group-item-action">
+									An item
+								</li>
 								<li className="list-group-item list-group-item-action">
 									A second item
 								</li>
@@ -51,10 +53,24 @@ const Product = () => {
 					</Col>
 					<Col className="row" xs="12" md="9">
 						<div className="col-12 col-md-5">
-							<img src={mainImg} style={{maxWidth: "300px", width: "100%", height: "300px"}} alt="" />
-							<div className="d-flex gap-2 justify-content-center flex-nowrap" style={{ overflowX: "auto" }}>
+							<img
+								src={mainImg}
+								style={{ maxWidth: "300px", width: "100%", height: "300px" }}
+								alt=""
+							/>
+							<div
+								className="d-flex gap-2 justify-content-center flex-nowrap"
+								style={{ overflowX: "auto" }}
+							>
 								{otherImg.map((e, index) => (
-									<img className="border btn rounded-3" onClick={() => setMainImg(e)} key={index} src={e} style={{maxWidth: 70}} alt={`image ${e}`} />
+									<img
+										className="border btn rounded-3"
+										onClick={() => setMainImg(e)}
+										key={index}
+										src={e}
+										style={{ maxWidth: 70 }}
+										alt={`image ${e}`}
+									/>
 								))}
 							</div>
 						</div>
@@ -93,22 +109,6 @@ const Product = () => {
 								<small>
 									Categories: <b>Footware</b>
 								</small>
-								<div className="d-flex flex-column mt-5">
-									<span className="fw-bold">Kindly visit us at:</span>
-									<span className="text-danger">
-										No 15, Kodesoh Street, Ikeja, Lagos.
-									</span>
-									<span className="fw-bold">You can also call</span>
-
-									<br />
-									<p className="d-flex flex-column">
-										<span>SANDRA 07064901525</span>
-										<span>GANIAT 08121981784</span>
-										<span>MAUREEN 08023859617</span>
-										<span>GRACE 08112200873</span>
-										<span>PASCAL 0809400356</span>
-									</p>
-								</div>
 							</div>
 
 							{/* <hr /> */}

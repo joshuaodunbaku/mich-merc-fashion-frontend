@@ -6,8 +6,8 @@ import { schema } from "../Utils/yup-schemas-validator/create-item-schema";
 import ErrorMessage from "../Components/ErrorMessage";
 import Select from "react-select";
 import { PrevImg } from "../Components/Styles/CreateItemStyle";
-import { RiDeleteBin3Line, RiDeleteBinFill } from "react-icons/ri";
-import { BiTrash, BiTrashAlt } from "react-icons/bi";
+import { BiTrashAlt } from "react-icons/bi";
+import { availabilityOptions, categoryOptions } from "../../data";
 
 const CreateItems = () => {
 	const [previewImageUrl, setPreviewImageUrl] = useState([]); // State for image preview
@@ -30,8 +30,10 @@ const CreateItems = () => {
 	};
 
 	const deleteItem = (indexToDelete) => {
-		console.log(indexToDelete);
 		if (previewImageUrl.length > 0) {
+			const removedImage = previewImageUrl[indexToDelete];
+			URL.revokeObjectURL(removedImage); // Clean up memory
+
 			setPreviewImageUrl((prevItems) =>
 				prevItems.filter((_, index) => index !== indexToDelete)
 			);
@@ -43,16 +45,22 @@ const CreateItems = () => {
 	// create a preview
 	const handleImageChange = (event) => {
 		const uploaded_images = event.target.files;
-		if (uploaded_images.length <= 4) {
-			for (let i = 0; i < event.target.files.length; i++) {
+		const totalImages = uploaded_images.length + previewImageUrl.length;
+
+		if (totalImages <= 4) {
+			for (let i = 0; i < uploaded_images.length; i++) {
 				console.log(uploaded_images[i]);
 				let prev_image_file_path = URL.createObjectURL(uploaded_images[i]);
+				// newPreviewImages.push(prev_image_file_path); // Collect the new images
+
 				setPreviewImageUrl((prevItems) => [...prevItems, prev_image_file_path]);
 			}
 		} else {
-			setPreviewImageUrl([]);
+			setPreviewImageUrl((prevItems) => [...prevItems]);
 			alert("You can only upload a maximum of 4 images.");
 		}
+
+		event.target.value = "";
 	};
 
 	const customStyles = {
@@ -91,8 +99,9 @@ const CreateItems = () => {
 									<Form.Control
 										className="shadow-sm"
 										type="text"
+										size="lg"
 										isInvalid={!!errors.product_name}
-										placeholder="First Name..."
+										placeholder="Product Name..."
 										// isInvalid={!!errors.product_name}
 										{...field}
 									/>
@@ -102,25 +111,71 @@ const CreateItems = () => {
 						</Form.Group>
 					</Col>
 					<Col className="my-2" md={"6"} xs={"12"}>
-						<Form.Group className="mb-3" controlId="amount_available">
-							<Form.Label>Amount Available</Form.Label>
+						<Form.Group className="mb-3" controlId="price">
+							<Form.Label>Price</Form.Label>
 							<Controller
-								name="amount_available"
+								name="price"
 								control={control}
 								render={({ field }) => (
 									<Form.Control
 										className="shadow-sm"
-										isInvalid={!!errors.amount_available}
+										isInvalid={!!errors.price}
 										type="text"
-										placeholder="0"
+										size="lg"
+										placeholder="$"
 										// isInvalid={!!errors.firstName}
 										{...field}
 									/>
 								)}
 							/>
-							<ErrorMessage source={errors.amount_available} />
+							<ErrorMessage source={errors.price} />
 						</Form.Group>
 					</Col>
+
+					<Col className="my-2" md={"6"} xs={"12"}>
+						<Form.Group className="w-100" as={Col} sm="6" controlId="category">
+							<Form.Label>Category</Form.Label>
+							<Controller
+								name="category"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<Select
+										required
+										placeholder="Select..."
+										className="text-dark "
+										styles={customStyles}
+										value={categoryOptions.find((e) => e.value === value)}
+										options={categoryOptions}
+										onChange={(val) => onChange(val)}
+									/>
+								)}
+							/>
+							<ErrorMessage source={errors.category} />
+						</Form.Group>
+					</Col>
+
+					<Col className="my-2" md={"6"} xs={"12"}>
+						<Form.Group className="mb-3" controlId="available">
+							<Form.Label>Available</Form.Label>
+							<Controller
+								name="category"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<Select
+										required
+										placeholder="Select..."
+										className="text-dark "
+										styles={customStyles}
+										value={availabilityOptions.find((e) => e.value === value)}
+										options={availabilityOptions}
+										onChange={(val) => onChange(val)}
+									/>
+								)}
+							/>
+							<ErrorMessage source={errors.available} />
+						</Form.Group>
+					</Col>
+
 					<Col className="my-2" md={"6"} xs={"12"}>
 						<Form.Group className="mb-3" controlId="description">
 							<Form.Label>Description</Form.Label>
@@ -133,53 +188,13 @@ const CreateItems = () => {
 										isInvalid={!!errors.description}
 										as={"textarea"}
 										type="text"
-										style={{ height: "70px" }}
+										style={{ height: "130px" }}
 										placeholder="Last Name..."
 										{...field}
 									/>
 								)}
-							/>{" "}
+							/>
 							<ErrorMessage source={errors.description} />
-						</Form.Group>
-					</Col>
-					<Col className="my-2" xs={"12"} md={"6"}>
-						<Form.Group controlId="address">
-							<Form.Label>Address</Form.Label>
-							<Controller
-								name="address"
-								control={control}
-								render={({ field }) => (
-									<Form.Control
-										className="shadow-sm"
-										isInvalid={!!errors.address}
-										as={"textarea"}
-										type="text"
-										style={{ height: "70px" }}
-										placeholder="Address here"
-										{...field}
-									/>
-								)}
-							/>
-							<ErrorMessage source={errors.address} />
-						</Form.Group>
-					</Col>
-					<Col className="my-2" md={"6"} xs={"12"}>
-						<Form.Group controlId="phone_number">
-							<Form.Label>Phone Number</Form.Label>
-							<Controller
-								name="phone_number"
-								control={control}
-								render={({ field }) => (
-									<Form.Control
-										type="tel"
-										className="shadow-sm"
-										isInvalid={!!errors.phone_number}
-										{...field}
-										placeholder="Phone number..."
-									/>
-								)}
-							/>
-							<ErrorMessage source={errors.phone_number} />
 						</Form.Group>
 					</Col>
 
@@ -198,7 +213,7 @@ const CreateItems = () => {
 										onChange={(e) => {
 											console.log(e);
 											handleImageChange(e); // Show image preview
-											field.onChange(e.target.files); // Update form state
+											field.onChange(Array.from(e.target.files)); // Update form state
 										}}
 										isInvalid={!!errors.image_upload} // Show invalid state if there are errors
 									/>
@@ -206,18 +221,26 @@ const CreateItems = () => {
 							/>
 							<ErrorMessage source={errors.image_upload} />
 						</Form.Group>
-						<div className="d-flex m-2 gap-2">
-							{previewImageUrl.map((img, index) => (
-								<PrevImg key={index}>
-									<img className="prev_img" src={img} width={"100%"} alt="" />
-									<BiTrashAlt
-										onClick={() => deleteItem(index)}
-										size={20}
-										className="delete_icon"
-									/>
-									<div className="overlay"></div>
-								</PrevImg>
-							))}
+						<div className="row m-2 gap-3">
+							{previewImageUrl.map((img, index) => {
+								return (
+									<PrevImg className="col-sm-6" key={index}>
+										<img
+											className="prev_img"
+											height={"100%"}
+											src={img}
+											width={"100%"}
+											alt=""
+										/>
+										<BiTrashAlt
+											onClick={() => deleteItem(index)}
+											size={25}
+											className="delete_icon"
+										/>
+										<div className="overlay"></div>
+									</PrevImg>
+								);
+							})}
 						</div>
 						<div className="bg-dark text-white"></div>
 					</Col>

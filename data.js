@@ -186,4 +186,15 @@ const SHOP_DATA = {
 };
 
 const categoryMap = ["shoes", "glasses", "belts", "shirts"];
-export { SHOP_DATA, categoryMap };
+
+const categoryOptions = [
+	{ value: "shoes", label: "Shoes" },
+	{ value: "belts", label: "Belts" },
+	{ value: "shirt", label: "Shirt" },
+	{ value: "glasses", label: "Glasses" },
+];
+const availabilityOptions = [
+	{ value: "in-stock", label: "In-Stock" },
+	{ value: "out-of-stock", label: "Out-Of-Stock" },
+];
+export { SHOP_DATA, categoryMap, categoryOptions, availabilityOptions };
