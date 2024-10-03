@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -21,12 +21,19 @@ const schema = yup.object().shape({
 });
 
 const EditProfilePage = () => {
+	const [show, setShow] = useState(false);
+	const [selectedImage, setSelectedImage] = useState(null);
 	const [previewImageUrl, setPreviewImageUrl] = useState([
 		IMAGES.glasses3,
 		IMAGES.glasses10,
 		IMAGES.belt1,
 		IMAGES.shoe2,
 	]);
+
+	const handleClose = () => {
+		setShow(false);
+	};
+	const handleShow = () => setShow(true);
 
 	const deleteItem = (indexToDelete) => {
 		if (previewImageUrl.length > 0) {
@@ -72,7 +79,7 @@ const EditProfilePage = () => {
 		defaultValues: {
 			product_name: "John",
 			price: "Doe",
-			available: "johndoe@email.com",
+			available: "out-of-stock",
 			description:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur et, praesentium quod voluptatem, exercitationem soluta qui eligendi vel doloribus distinctio incidunt necessitatibus. Temporibus, delectus ipsum accusantium hic possimus suscipit nostrum.",
 			category: "1",
@@ -159,8 +166,8 @@ const EditProfilePage = () => {
 								{...register("available")}
 							>
 								<option>Select...</option>
-								<option value="1">Male</option>
-								<option value="2">Female</option>
+								<option value="in-stock">In-Stock</option>
+								<option value="out-of-stock">Out-of-Stock</option>
 							</Form.Select>
 							<ErrorMessage source={errors.available} />
 						</Form.Group>
@@ -175,6 +182,9 @@ const EditProfilePage = () => {
 							<Form.Control
 								as={"textarea"}
 								required
+								style={{
+									height: "100px",
+								}}
 								type="text"
 								placeholder="Description..."
 								{...register("description")}
@@ -184,8 +194,9 @@ const EditProfilePage = () => {
 					</Row>
 					<div className="text-center">
 						<Button
-							variant="primary"
+							variant="outline-primary"
 							type="submit"
+							size="lg"
 							onClick={handleSubmit(onSubmit)}
 						>
 							Update
@@ -202,7 +213,7 @@ const EditProfilePage = () => {
 					<div className="row m-2 gap-3">
 						{previewImageUrl.map((img, index) => {
 							return (
-								<PrevImg className="col-sm-6 border rounded" key={index}>
+								<PrevImg className={`col-sm-6 border rounded`} key={index}>
 									<img
 										className="prev_img"
 										height={"100%"}
@@ -211,7 +222,11 @@ const EditProfilePage = () => {
 										alt=""
 									/>
 									<BiTrashAlt
-										onClick={() => deleteItem(index)}
+										onClick={() => {
+											handleShow();
+											setSelectedImage(index);
+											console.log(previewImageUrl[index]);
+										}}
 										size={25}
 										className="delete_icon"
 									/>
@@ -244,10 +259,41 @@ const EditProfilePage = () => {
 							<ErrorMessage source={errors.image_upload} />
 						</Form.Group>
 					</Col>
-					<Button variant="primary" size="lg" type="submit" onClick={""}>
+					<Button variant="primary" size="lg" onClick={handleShow}>
 						Update
 					</Button>
 				</Form>
+
+				<Modal show={show} onHide={handleClose}>
+					<Modal.Header closeButton>
+						<Modal.Title>Confirm Delete</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						Are you sure you want to delete this Image?
+						<img
+							className="prev_img"
+							height={"100px"}
+							src={previewImageUrl[selectedImage]}
+							width={"100px"}
+							alt=""
+						/>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button variant="danger" onClick={handleClose}>
+							Close
+						</Button>
+						<Button
+							variant="success"
+							onClick={() => {
+								// console.log(index, previewImageUrl[index]);
+								deleteItem(selectedImage);
+								handleClose();
+							}}
+						>
+							Save Changes
+						</Button>
+					</Modal.Footer>
+				</Modal>
 			</div>
 		</>
 	);
