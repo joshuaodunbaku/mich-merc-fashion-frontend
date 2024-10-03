@@ -6,14 +6,14 @@ const schema = yup.object().shape({
 	description: yup.string().required("Description is required"),
 
 	price: yup.string().required("Price is required"),
-	available: yup
-		.object()
-		.oneOf(availabilityOptions)
-		.required("Status is required"),
 	category: yup
 		.object()
 		.oneOf(categoryOptions)
 		.required("Category is required"),
+	available: yup
+		.object()
+		.oneOf(availabilityOptions)
+		.required("Available is required"),
 	image_upload: yup
 		.array()
 		.of(
@@ -27,7 +27,9 @@ const schema = yup.object().shape({
 				) // 10MB limit
 				.test("fileType", "Unsupported file format", (value) =>
 					value
-						? ["image/jpeg", "image/png", "image/gif"].includes(value.type)
+						? ["image/jpeg", "image/jpg", "image/png", "image/gif"].includes(
+								value.type
+						  )
 						: false
 				)
 		)
