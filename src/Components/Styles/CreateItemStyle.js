@@ -7,10 +7,12 @@ export const PrevImg = styled.div`
 
 	.prev_img {
 		position: absolute;
+		top: 0;
 	}
 	& .delete_icon {
 		position: absolute;
 		top: 55px;
+		left: 0;
 		color: red;
 		z-index: 999;
 		width: 100%;

@@ -14,10 +14,14 @@ const CreateItems = () => {
 	const {
 		control,
 		handleSubmit,
+		register,
 		formState: { errors },
 		reset,
 	} = useForm({
 		resolver: yupResolver(schema),
+		defaultValues: {
+			image_upload: [],
+		},
 	});
 
 	const onSubmit = (data) => {
@@ -25,8 +29,8 @@ const CreateItems = () => {
 		console.log("uploaded");
 
 		// Reset the form and preview after submission
-		setPreviewImageUrl(null);
-		reset();
+		// setPreviewImageUrl(null);
+		// reset();
 	};
 
 	const deleteItem = (indexToDelete) => {
@@ -44,23 +48,21 @@ const CreateItems = () => {
 
 	// create a preview
 	const handleImageChange = (event) => {
-		const uploaded_images = event.target.files;
+		const uploaded_images = event;
 		const totalImages = uploaded_images.length + previewImageUrl.length;
 
 		if (totalImages <= 4) {
 			for (let i = 0; i < uploaded_images.length; i++) {
 				console.log(uploaded_images[i]);
 				let prev_image_file_path = URL.createObjectURL(uploaded_images[i]);
-				// newPreviewImages.push(prev_image_file_path); // Collect the new images
 
 				setPreviewImageUrl((prevItems) => [...prevItems, prev_image_file_path]);
 			}
 		} else {
-			setPreviewImageUrl((prevItems) => [...prevItems]);
+			// setPreviewImageUrl((prevItems) => [...prevItems]);
+			event.target.value = "";
 			alert("You can only upload a maximum of 4 images.");
 		}
-
-		event.target.value = "";
 	};
 
 	const customStyles = {
@@ -132,6 +134,32 @@ const CreateItems = () => {
 						</Form.Group>
 					</Col>
 
+					{/* <Form.Group
+						className="my-2 my-sm-3"
+						as={Col}
+						sm="6"
+						xs={"12"}
+						controlId="category"
+					>
+						<Form.Label>Category</Form.Label>
+						<Controller
+							name="category"
+							control={control}
+							render={({ field: { onChange, value } }) => (
+								<Select
+									required
+									placeholder="Category..."
+									// {...register("category")}
+									value={categoryOptions.find((e) => e.value === value)}
+									onChange={(val) => onChange(val.value)}
+									options={categoryOptions}
+								/>
+							)}
+						/>
+
+						<ErrorMessage source={errors.category} />
+					</Form.Group> */}
+
 					<Col className="my-2" md={"6"} xs={"12"}>
 						<Form.Group className="w-100" as={Col} sm="6" controlId="category">
 							<Form.Label>Category</Form.Label>
@@ -141,6 +169,7 @@ const CreateItems = () => {
 								render={({ field: { onChange, value } }) => (
 									<Select
 										required
+										name="category"
 										placeholder="Select..."
 										className="text-dark "
 										styles={customStyles}
@@ -158,11 +187,12 @@ const CreateItems = () => {
 						<Form.Group className="mb-3" controlId="available">
 							<Form.Label>Available</Form.Label>
 							<Controller
-								name="category"
+								name="available"
 								control={control}
 								render={({ field: { onChange, value } }) => (
 									<Select
 										required
+										name="available"
 										placeholder="Select..."
 										className="text-dark "
 										styles={customStyles}
@@ -212,8 +242,10 @@ const CreateItems = () => {
 										multiple
 										onChange={(e) => {
 											console.log(e);
-											handleImageChange(e); // Show image preview
-											field.onChange(Array.from(e.target.files)); // Update form state
+											const files = Array.from(e.target.files); // Update form state
+											console.log(files);
+											field.onChange(files);
+											handleImageChange(files); // Show image preview
 										}}
 										isInvalid={!!errors.image_upload} // Show invalid state if there are errors
 									/>

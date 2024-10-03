@@ -21,7 +21,7 @@ const NavBar = () => {
 						</Link>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
+					<Navbar.Collapse id="basic-navbar-nav text-center">
 						<Nav className="mx-auto gap-0 gap-md-3">
 							{/* <Nav.Link> */}
 							<Link
@@ -34,7 +34,7 @@ const NavBar = () => {
 							</Link>
 							{/* </Nav.Link> */}
 							{/* <Nav.Link> */}
-							<Dropdown>
+							<Dropdown className="mx-auto">
 								<Dropdown.Toggle
 									className="text-decoration-none nav-link"
 									variant="transparent"

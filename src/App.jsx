@@ -9,6 +9,7 @@ import CreateItems from "./Routes/CreateItems";
 import Orders from "./Routes/Orders";
 import ChangePw from "./Routes/ChangePw";
 import ViewItemsDetails from "./Routes/ViewItemsDetails";
+import Test from "./Routes/Test";
 // import KiddiesHome from "../../kiddies-and-me/src/Routes/Home"
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
 				<Route path="/dashboard/create-items" element={<CreateItems />} />
 				<Route path="/dashboard/orders" element={<Orders />} />
 				<Route path="/dashboard/change-pw" element={<ChangePw />} />
-				<Route path="/test" element={<Category />} />
+				<Route path="/test" element={<Test />} />
 			</Routes>
 		</>
 	);
