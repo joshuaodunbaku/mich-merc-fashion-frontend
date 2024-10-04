@@ -18,7 +18,10 @@ const ProductCard = ({ productInfo }) => {
 	return (
 		<Wrapper>
 			<div>
-				<Card className="gap-2 m-2 border-0 rounded-1 bg-light">
+				<Card
+					style={{ height: "450px" }}
+					className="gap-2 m-2 border-0 rounded-1 bg-light"
+				>
 					<Card.Img
 						className="rounded-0"
 						variant="top"
@@ -30,7 +33,7 @@ const ProductCard = ({ productInfo }) => {
 							{name}
 						</h4>
 					</Card.Header>
-					<Card.Body className="">
+					<Card.Body className="d-flex flex-column justify-content-between">
 						<Card.Title className="">
 							<h4>
 								<span>${price}</span>

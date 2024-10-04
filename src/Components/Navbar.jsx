@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Dropdown, DropdownButton, Nav, Navbar } from "react-bootstrap";
 import IMAGES from "../images/images";
 import { Link, useNavigate } from "react-router-dom";
+import { LuShoppingBag } from "react-icons/lu";
 
 const NavBar = () => {
 	const navigate = useNavigate();
@@ -90,6 +91,9 @@ const NavBar = () => {
 								DASHBOARD
 							</Link>
 						</Nav>
+						<Link to={"/cart"}>
+							<LuShoppingBag size={30} />
+						</Link>
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

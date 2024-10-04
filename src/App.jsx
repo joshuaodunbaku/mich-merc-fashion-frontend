@@ -10,6 +10,8 @@ import Orders from "./Routes/Orders";
 import ChangePw from "./Routes/ChangePw";
 import ViewItemsDetails from "./Routes/ViewItemsDetails";
 import Test from "./Routes/Test";
+import Cart from "./Routes/Cart";
+import Checkout from "./Routes/Checkout";
 // import KiddiesHome from "../../kiddies-and-me/src/Routes/Home"
 
 function App() {
@@ -19,8 +21,13 @@ function App() {
 				<Route index path={"/"} element={<Home />} />
 				<Route path="/about" element={<Home />} />
 				<Route path="/product" element={<Product />} />
+				{/* Cart */}
+				<Route path="/cart" element={<Cart />} />
+				<Route path="/cart/checkout" element={<Checkout />} />
+				{/* Shop */}
 				<Route path="/shop" element={<Shop />} />
 				<Route path="/shop/:category" element={<Category />} />
+				{/* Dashboard */}
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/dashboard/view-items" element={<ViewItems />} />
 				<Route
@@ -30,6 +37,7 @@ function App() {
 				<Route path="/dashboard/create-items" element={<CreateItems />} />
 				<Route path="/dashboard/orders" element={<Orders />} />
 				<Route path="/dashboard/change-pw" element={<ChangePw />} />
+
 				<Route path="/test" element={<Test />} />
 			</Routes>
 		</>
