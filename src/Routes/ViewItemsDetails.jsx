@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
+// yup
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
 import ErrorMessage from "../Components/ErrorMessage";
 import { PrevImg } from "../Components/Styles/CreateItemStyle";
 import IMAGES from "../images/images";
