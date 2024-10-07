@@ -28,55 +28,71 @@ const Checkout = () => {
 								className="my-2 my-sm-3"
 								as={Col}
 								xs="12"
-								controlId="product_name"
+								controlId="fname"
 							>
-								<Form.Label>Product Name</Form.Label>
+								<Form.Label>First Name</Form.Label>
 								<Form.Control
 									required
 									type="text"
-									placeholder="Product Name..."
-									{...register("product_name")}
+									placeholder="First Name..."
+									{...register("fname")}
 								/>
-								<ErrorMessage source={errors.product_name} />
+								<ErrorMessage source={errors.fname} />
 							</Form.Group>
 
 							<Form.Group
 								className="my-2 my-sm-3"
 								as={Col}
 								xs="12"
-								controlId="price"
+								controlId="lname"
 							>
-								<Form.Label>Price</Form.Label>
+								<Form.Label>Last Name</Form.Label>
 								<Form.Control
 									required
 									type="text"
-									placeholder="Price..."
-									{...register("price")}
+									placeholder="Last Name..."
+									{...register("lname")}
 								/>
-								<ErrorMessage source={errors.price} />
+								<ErrorMessage source={errors.lname} />
 							</Form.Group>
 
 							<Form.Group
 								className="my-2 my-sm-3"
 								as={Col}
 								xs="12"
-								controlId="category"
+								controlId="compName"
 							>
-								<Form.Label>Category</Form.Label>
+								<Form.Label>Company name (optional)</Form.Label>
+								<Form.Control
+									required
+									type="text"
+									placeholder="Last Name..."
+									{...register("compName")}
+								/>
+								<ErrorMessage source={errors.compName} />
+							</Form.Group>
+
+							<Form.Group
+								className="my-2 my-sm-3"
+								as={Col}
+								xs="12"
+								controlId="country"
+							>
+								<Form.Label>Country / Region *</Form.Label>
 								<Form.Select
 									required
 									aria-label="Default select example"
 									placeholder="Select..."
-									{...register("category")}
+									{...register("country")}
 								>
 									<option>Select...</option>
 									<option value="1">Male</option>
 									<option value="2">Female</option>
 								</Form.Select>
-								<ErrorMessage source={errors.category} />
+								<ErrorMessage source={errors.country} />
 							</Form.Group>
 
-							<Form.Group
+							{/* <Form.Group
 								className="my-2 my-sm-3"
 								as={Col}
 								xs="12"
@@ -94,15 +110,15 @@ const Checkout = () => {
 									<option value="out-of-stock">Out-of-Stock</option>
 								</Form.Select>
 								<ErrorMessage source={errors.available} />
-							</Form.Group>
+							</Form.Group> */}
 
 							<Form.Group
 								className="my-2 my-sm-3"
 								as={Col}
 								xs="12"
-								controlId="description"
+								controlId="address"
 							>
-								<Form.Label>Description</Form.Label>
+								<Form.Label>Street address *</Form.Label>
 								<Form.Control
 									as={"textarea"}
 									required
@@ -110,10 +126,102 @@ const Checkout = () => {
 										height: "100px",
 									}}
 									type="text"
-									placeholder="Description..."
-									{...register("description")}
+									placeholder="Street address *..."
+									{...register("address")}
 								/>
-								<ErrorMessage source={errors.description} />
+								<ErrorMessage source={errors.address} />
+							</Form.Group>
+
+							<Form.Group
+								className="my-2 my-sm-3"
+								as={Col}
+								xs="12"
+								controlId="town"
+							>
+								<Form.Label>Town / City *</Form.Label>
+								<Form.Control
+									as={"textarea"}
+									required
+									style={{
+										height: "100px",
+									}}
+									type="text"
+									placeholder="Town / City *..."
+									{...register("town")}
+								/>
+								<ErrorMessage source={errors.town} />
+							</Form.Group>
+
+							<Form.Group
+								className="my-2 my-sm-3"
+								as={Col}
+								xs="12"
+								controlId="state"
+							>
+								<Form.Label>State *</Form.Label>
+								<Form.Select
+									required
+									aria-label="Default select example"
+									placeholder="Select..."
+									{...register("state")}
+								>
+									<option>Select...</option>
+									<option value="1">Male</option>
+									<option value="2">Female</option>
+								</Form.Select>
+								<ErrorMessage source={errors.country} />
+							</Form.Group>
+
+							<Form.Group
+								className="my-2 my-sm-3"
+								as={Col}
+								xs="12"
+								controlId="phone"
+							>
+								<Form.Label>Phone *</Form.Label>
+								<Form.Control
+									required
+									type="text"
+									placeholder="Phone *..."
+									{...register("phone")}
+								/>
+								<ErrorMessage source={errors.phone} />
+							</Form.Group>
+
+							<Form.Group
+								className="my-2 my-sm-3"
+								as={Col}
+								xs="12"
+								controlId="email"
+							>
+								<Form.Label>Email address *</Form.Label>
+								<Form.Control
+									required
+									type="email"
+									placeholder="name@mail.com"
+									{...register("email")}
+								/>
+								<ErrorMessage source={errors.email} />
+							</Form.Group>
+
+							<Form.Group
+								className="my-2 my-sm-3"
+								as={Col}
+								xs="12"
+								controlId="notes"
+							>
+								<Form.Label>Order notes (optional)</Form.Label>
+								<Form.Control
+									as={"textarea"}
+									required
+									style={{
+										height: "100px",
+									}}
+									type="text"
+									placeholder="Order notes (optional)..."
+									{...register("notes")}
+								/>
+								<ErrorMessage source={errors.notes} />
 							</Form.Group>
 						</Row>
 						<div className="text-center">
@@ -175,14 +283,14 @@ const Checkout = () => {
 						<label className="d-flex gap-2 p-3" htmlFor="cash">
 							<input type="radio" name="paymentMethod" id="cash" />
 							Cash on delivery
-						</label>{" "}
+						</label>
 						<p className="bg-secondary-subtle p-3">
 							Pay with cash upon delivery.
 						</p>
 						<label className="d-flex gap-2 p-3" htmlFor="checkout">
 							<input type="radio" name="paymentMethod" id="checkout" />
 							CDL Checkout
-						</label>{" "}
+						</label>
 						<p className="bg-secondary-subtle p-3">Pay via CDL Checkout</p>
 					</div>
 
