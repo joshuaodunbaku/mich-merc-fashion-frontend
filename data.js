@@ -197,4 +197,19 @@ const availabilityOptions = [
 	{ value: "in-stock", label: "In-Stock" },
 	{ value: "out-of-stock", label: "Out-Of-Stock" },
 ];
-export { SHOP_DATA, categoryMap, categoryOptions, availabilityOptions };
+
+
+const countryOptions = [
+	{ value: "chocolate", label: "Chocolate" },
+	{ value: "strawberry", label: "Strawberry" },
+	{ value: "vanilla", label: "Vanilla" },
+	{ value: "vanilla", label: "Vanilla" },
+];
+
+export {
+	SHOP_DATA,
+	categoryMap,
+	categoryOptions,
+	availabilityOptions,
+	countryOptions,
+};

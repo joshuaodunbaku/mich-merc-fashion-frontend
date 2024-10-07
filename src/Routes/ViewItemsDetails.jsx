@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 // yup
@@ -12,19 +12,16 @@ import { BiTrashAlt } from "react-icons/bi";
 
 const schema = yup.object().shape({
 	product_name: yup.string().required("First name is required!"),
-	price: yup.string().required("Last name is required!"),
-	available: yup
-		.string()
-		.required("A correct email format johndoe@gmail.com is required"),
-	description: yup
-		.string()
-		.required("A correct email format johndoe@gmail.com is required"),
+	price: yup.string().required("Price is required!"),
+	available: yup.string().required("Availality  is required"),
+	description: yup.string().required("Description"),
 	category: yup.string().max(1).required("Category is required!"),
 });
 
 const EditProfilePage = () => {
 	const [show, setShow] = useState(false);
-	const [selectedImage, setSelectedImage] = useState(null);
+	const [selectedImageIndex, setSelectedImage] = useState(null);
+	const [newImage, setNewImage] = useState([]);
 	const [previewImageUrl, setPreviewImageUrl] = useState([
 		IMAGES.glasses3,
 		IMAGES.glasses10,
@@ -50,19 +47,27 @@ const EditProfilePage = () => {
 		}
 	};
 
+	useEffect(() => {
+		console.log(newImage);
+	}, [newImage]);
+
 	// create a preview
-	const handleImageChange = (event) => {
+	const handleAddNewImage = (event) => {
 		const uploaded_images = event.target.files;
+		console.log("checking image to upload", uploaded_images);
 		const totalImages = uploaded_images.length + previewImageUrl.length;
 
 		if (totalImages <= 4) {
+			let newImageArray = [];
+
 			for (let i = 0; i < uploaded_images.length; i++) {
 				console.log(uploaded_images[i]);
 				let prev_image_file_path = URL.createObjectURL(uploaded_images[i]);
-				// newPreviewImages.push(prev_image_file_path); // Collect the new images
-
+				// newImage.push(prev_image_file_path); // Collect the new images
+				newImageArray.push(uploaded_images[i]); // sends the newly added image to the state
 				setPreviewImageUrl((prevItems) => [...prevItems, prev_image_file_path]);
 			}
+			setNewImage((prevImages) => [...prevImages, ...newImageArray]);
 		} else {
 			setPreviewImageUrl((prevItems) => [...prevItems]);
 			alert("You can only upload a maximum of 4 images.");
@@ -251,7 +256,7 @@ const EditProfilePage = () => {
 										multiple
 										onChange={(e) => {
 											console.log(e);
-											handleImageChange(e); // Show image preview
+											handleAddNewImage(e); // add the new image
 											field.onChange(e.target.files); // Update form state
 										}}
 										isInvalid={!!errors.image_upload} // Show invalid state if there are errors
@@ -275,7 +280,7 @@ const EditProfilePage = () => {
 						<img
 							className="prev_img"
 							height={"100px"}
-							src={previewImageUrl[selectedImage]}
+							src={previewImageUrl[selectedImageIndex]}
 							width={"100px"}
 							alt=""
 						/>
@@ -288,7 +293,7 @@ const EditProfilePage = () => {
 							variant="success"
 							onClick={() => {
 								// console.log(index, previewImageUrl[index]);
-								deleteItem(selectedImage);
+								deleteItem(selectedImageIndex);
 								handleClose();
 							}}
 						>

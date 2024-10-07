@@ -242,10 +242,10 @@ const CreateItems = () => {
 										multiple
 										onChange={(e) => {
 											console.log(e);
-											const files = Array.from(e.target.files); // Update form state
+											const files = Array.from(e.target.files); // puts the image in an array
 											console.log(files);
 											field.onChange(files);
-											handleImageChange(files); // Show image preview
+											handleImageChange(files); // sends the files array to handleImageChange
 										}}
 										isInvalid={!!errors.image_upload} // Show invalid state if there are errors
 									/>
