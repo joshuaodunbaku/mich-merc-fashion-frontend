@@ -88,7 +88,9 @@ const CreateItems = () => {
 		}),
 	};
 	return (
-		<div className="container">
+		<div className="container my-auto">
+			<h1 className="text-center">ADD ITEM</h1>
+
 			<Form className="my-2 border rounded p-4 bg-light">
 				<Row>
 					<Col className="my-2" md={"6"} xs={"12"}>
@@ -242,10 +244,10 @@ const CreateItems = () => {
 										multiple
 										onChange={(e) => {
 											console.log(e);
-											const files = Array.from(e.target.files); // Update form state
+											const files = Array.from(e.target.files); // puts the image in an array
 											console.log(files);
 											field.onChange(files);
-											handleImageChange(files); // Show image preview
+											handleImageChange(files); // sends the files array to handleImageChange
 										}}
 										isInvalid={!!errors.image_upload} // Show invalid state if there are errors
 									/>

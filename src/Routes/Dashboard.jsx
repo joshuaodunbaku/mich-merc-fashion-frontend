@@ -5,7 +5,7 @@ import IMAGES from "../images/images";
 
 const Dashboard = () => {
 	return (
-		<div className="container">
+		<div className="container my-auto">
 			<h1 className="text-center">ADMIN DASHBOARD</h1>
 			<Row>
 				<Col className="p-3" xs={"12"} md={"6"}>

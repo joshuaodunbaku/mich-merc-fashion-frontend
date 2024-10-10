@@ -36,6 +36,8 @@ const Cart = () => {
 	// 	setCartObject(SHOP_DATA.glasses);
 	// }, [cartObject]);
 
+	let total = 0;
+
 	return (
 		<div className="container">
 			<h1>Cart</h1>
@@ -62,6 +64,7 @@ const Cart = () => {
 				<tbody>
 					{cartObject ? (
 						cartObject.map(({ id, name, imageUrl, price }, index) => {
+							total += price;
 							return (
 								<tr key={id} className="">
 									<th style={{ padding: "20px" }} scope="row">
@@ -89,7 +92,11 @@ const Cart = () => {
 					)}
 				</tbody>
 			</table>
-			<div className="my-3 text-end">
+			<div className="my-3 text-center P-3">
+				<div className="text-center">
+					<p className="m-0 fs-2">Total</p>
+					<span className="fs-4">${total}</span>
+				</div>
 				<button
 					className="btn btn-lg btn-outline-danger px-3 rounded-pill"
 					onClick={() => navigate("checkout")}

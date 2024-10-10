@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './Routes/Home';
 import Product from './Routes/Product';
-import Category from './Components/Category';
-import Shop from './Routes/Shop';
+import Category from "./Routes/Category";
+import Shop from "./Routes/Shop";
 import Dashboard from "./Routes/Dashboard";
 import ViewItems from "./Routes/ViewItems";
 import CreateItems from "./Routes/CreateItems";
@@ -12,11 +12,13 @@ import ViewItemsDetails from "./Routes/ViewItemsDetails";
 import Test from "./Routes/Test";
 import Cart from "./Routes/Cart";
 import Checkout from "./Routes/Checkout";
-// import KiddiesHome from "../../kiddies-and-me/src/Routes/Home"
+import NavBar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
 function App() {
 	return (
-		<>
+		<div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
+			<NavBar />
 			<Routes>
 				<Route index path={"/"} element={<Home />} />
 				<Route path="/about" element={<Home />} />
@@ -40,7 +42,10 @@ function App() {
 
 				<Route path="/test" element={<Test />} />
 			</Routes>
-		</>
+			<div className="mt-auto">
+				<Footer />
+			</div>
+		</div>
 	);
 }
 

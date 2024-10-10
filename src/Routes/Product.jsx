@@ -3,6 +3,8 @@ import { Col, Row } from "react-bootstrap";
 import IMAGES from "../images/images";
 import { BsArrowRight } from "react-icons/bs";
 import styled from "styled-components";
+import { capitalizeFirstLetter } from "../Utils/helpers";
+import { Link } from "react-router-dom";
 
 const Product = () => {
 	const [mainImg, setMainImg] = useState(IMAGES.shoe1);
@@ -36,18 +38,13 @@ const Product = () => {
 								Categories
 							</p>
 							<ul className="list-group">
-								<li className="list-group-item list-group-item-action">
-									An item
-								</li>
-								<li className="list-group-item list-group-item-action">
-									A second item
-								</li>
-								<li className="list-group-item list-group-item-action">
-									A third item
-								</li>
-								<li className="list-group-item list-group-item-action">
-									A fourth item
-								</li>
+								{["glasses", "belts", "footwares", "shirts"].map((item) => (
+									<Link className="text-decoration-none" to={`/shop/${item}`}>
+										<li className="list-group-item list-group-item-action">
+											{capitalizeFirstLetter(item)}
+										</li>
+									</Link>
+								))}
 							</ul>
 						</div>
 					</Col>
