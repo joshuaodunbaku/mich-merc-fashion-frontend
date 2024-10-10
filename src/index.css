@@ -28,3 +28,6 @@ p, span, button{
 .raleway{
   font-family: "Raleway", sans-serif;
 }
+html, body {
+  height: 100%;
+}

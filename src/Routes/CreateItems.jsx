@@ -88,7 +88,9 @@ const CreateItems = () => {
 		}),
 	};
 	return (
-		<div className="container">
+		<div className="container my-auto">
+			<h1 className="text-center">ADD ITEM</h1>
+
 			<Form className="my-2 border rounded p-4 bg-light">
 				<Row>
 					<Col className="my-2" md={"6"} xs={"12"}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Category from '../Components/Category'
+import Category from "./Category";
 import CategoryPrev from '../Components/CategoryPrev'
 import { categoryMap, SHOP_DATA } from '../../data'
 
